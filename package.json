@@ -1,0 +1,12 @@
+{
+  "name": "evercodelab",
+  "version": "1.0.0",
+  "description": "Repository for Evercode Learning Course",
+  "license": "ISC",
+  "author": "Sasha Pervykh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
