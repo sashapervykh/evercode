@@ -33,6 +33,7 @@ describe("scheduleTask", () => {
     }).toThrow(ValidationError);
   });
   test("should log schedule task", () => {
+    jest.spyOn(console, "log").mockImplementation(() => {});
     jest.useFakeTimers();
     const task = jest.fn();
     scheduleTask("Test task", 1000, task);
