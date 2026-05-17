@@ -1,4 +1,4 @@
-const { appName } = require("./config");
+const { appName } = require("../../config/config");
 
 function log(message) {
   console.log(`[${appName}]: ${message}`);

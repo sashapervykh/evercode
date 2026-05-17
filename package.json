@@ -5,8 +5,8 @@
   "license": "ISC",
   "author": "Sasha Pervykh",
   "type": "commonjs",
-  "main": "scheduler.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node scheduler.js"
+    "start": "node index.js"
   }
 }
