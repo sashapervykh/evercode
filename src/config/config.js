@@ -1,5 +1,5 @@
 module.exports = {
   appName: "Evercode Test Task",
-  port: process.env.PORT ?? 3000,
+  port: Number(process.env.PORT) || 3000,
   env: process.env.NODE_ENV ?? "development",
 };
