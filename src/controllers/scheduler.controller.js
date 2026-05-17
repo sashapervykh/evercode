@@ -1,8 +1,8 @@
-const log = require("../utils/logger/logger");
+const { logger } = require("../utils/logger/logger");
 const scheduleTask = require("../services/scheduler.service");
 
 function startScheduler() {
-  log("Scheduler запущен");
+  logger.info("Scheduler запущен");
   scheduleTask("running", 10000, () => log("running"));
 }
 
