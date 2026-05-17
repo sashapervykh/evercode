@@ -1,11 +1,19 @@
 const { appName, loggerLevel } = require("../../config/config");
 
 const LEVELS = {
-  error: 0,
-  warn: 1,
-  info: 2,
-  debug: 3,
-  trace: 4,
+  ERROR: 0,
+  WARN: 1,
+  INFO: 2,
+  DEBUG: 3,
+  TRACE: 4,
+};
+
+const LEVEL_NAMES = {
+  ERROR: "ERROR",
+  WARN: "WARN",
+  INFO: "INFO",
+  DEBUG: "DEBUG",
+  TRACE: "TRACE",
 };
 
 class Logger {
@@ -23,10 +31,10 @@ class Logger {
       time,
       `[${this.#loggerName}]`,
       `[${level}]`,
-      `[${message}]`,
+      `${message}`,
     ];
     if (options.requestId) {
-      finalMessageParts.push(`[requestId=${options.requestId}]`);
+      finalMessageParts.push(`| requestId=${options.requestId}`);
     }
     return finalMessageParts.join(" ");
   }
@@ -36,11 +44,11 @@ class Logger {
     const formattedMessage = this.#format(level, message, options);
 
     switch (level) {
-      case "error": {
+      case LEVEL_NAMES.ERROR: {
         console.error(formattedMessage);
         break;
       }
-      case "warn": {
+      case LEVEL_NAMES.WARN: {
         console.warn(formattedMessage);
         break;
       }
@@ -55,19 +63,19 @@ class Logger {
   }
 
   error(message, options) {
-    this.#log("error", message, options);
+    this.#log(LEVEL_NAMES.ERROR, message, options);
   }
   warn(message, options) {
-    this.#log("warn", message, options);
+    this.#log(LEVEL_NAMES.WARN, message, options);
   }
   info(message, options) {
-    this.#log("info", message, options);
+    this.#log(LEVEL_NAMES.INFO, message, options);
   }
   debug(message, options) {
-    this.#log("debug", message, options);
+    this.#log(LEVEL_NAMES.DEBUG, message, options);
   }
   trace(message, options) {
-    this.#log("trace", message, options);
+    this.#log(LEVEL_NAMES.TRACE, message, options);
   }
 }
 
