@@ -1,15 +1,9 @@
-import express from "express";
+import { app } from "./app.js";
 import { startScheduler } from "./modules/scheduler/scheduler.controller.js";
-import { statusRouter } from "./modules/status/status.router.js";
+import { config } from "./config/config.js";
 
-const app = express();
-
-app.use(express.json());
-
-app.use("/status", statusRouter);
-
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+app.listen(config.port, () => {
+  console.log(`Server running on PORT=${config.port}`);
 });
 
 startScheduler();
