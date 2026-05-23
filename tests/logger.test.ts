@@ -1,4 +1,4 @@
-const { logger, Logger } = require("../src/utils/logger/logger");
+import { logger, Logger } from "../src/utils/logger/logger.js";
 
 describe("logger", () => {
   afterEach(() => {

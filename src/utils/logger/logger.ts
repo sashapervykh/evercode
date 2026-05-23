@@ -20,7 +20,7 @@ const LEVELS: Record<LevelName, number> = {
   TRACE: 4,
 };
 
-class Logger {
+export class Logger {
   #currentLevel: LevelName = LEVEL_NAMES.INFO;
   #loggerName;
 

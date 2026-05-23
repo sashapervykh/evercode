@@ -1,5 +1,5 @@
-const scheduleTask = require("../src/services/scheduler.service");
-const ValidationError = require("../src/utils/errors/ValidationError");
+import { scheduleTask } from "../src/modules/scheduler/scheduler.service.js";
+import { ValidationError } from "../src/utils/errors/ValidationError.js";
 
 describe("scheduleTask", () => {
   test("should throw ValidationError if task name is empty", () => {
