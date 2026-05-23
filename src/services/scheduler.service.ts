@@ -1,8 +1,8 @@
-const AppError = require("../utils/errors/AppError");
-const ValidationError = require("../utils/errors/ValidationError");
-const { logger } = require("../utils/logger/logger");
+import { AppError } from "../utils/errors/AppError.js";
+import { ValidationError } from "../utils/errors/ValidationError.js";
+import { logger } from "../utils/logger/logger.js";
 
-function scheduleTask(name, interval, task) {
+export function scheduleTask(name: string, interval: number, task: () => void) {
   if (!name || typeof name !== "string") {
     throw new ValidationError(
       "Task name should be provided as non-empty string to scheduler",
@@ -29,5 +29,3 @@ function scheduleTask(name, interval, task) {
     }
   }, interval);
 }
-
-module.exports = scheduleTask;

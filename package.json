@@ -4,15 +4,20 @@
   "description": "Repository for Evercode Learning Course",
   "license": "ISC",
   "author": "Sasha Pervykh",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
   "devDependencies": {
-    "jest": "^30.4.2"
+    "@types/node": "^25.9.1",
+    "jest": "^30.4.2",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3"
   }
 }
