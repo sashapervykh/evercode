@@ -2,7 +2,17 @@ import { config } from "../../config/config.js";
 
 const { appName, loggerLevel } = config;
 
-const LEVELS = {
+const LEVEL_NAMES = {
+  ERROR: "ERROR",
+  WARN: "WARN",
+  INFO: "INFO",
+  DEBUG: "DEBUG",
+  TRACE: "TRACE",
+} as const;
+
+type LevelName = keyof typeof LEVEL_NAMES;
+
+const LEVELS: Record<LevelName, number> = {
   ERROR: 0,
   WARN: 1,
   INFO: 2,
@@ -10,20 +20,14 @@ const LEVELS = {
   TRACE: 4,
 };
 
-const LEVEL_NAMES = {
-  ERROR: "ERROR",
-  WARN: "WARN",
-  INFO: "INFO",
-  DEBUG: "DEBUG",
-  TRACE: "TRACE",
-};
-
 class Logger {
-  #currentLevel: keyof typeof LEVELS;
+  #currentLevel: LevelName = LEVEL_NAMES.INFO;
   #loggerName;
 
   constructor(level = loggerLevel, loggerName = appName) {
-    this.#currentLevel = level;
+    if (this.#isValidLevel(level)) {
+      this.#currentLevel = level;
+    }
     this.#loggerName = loggerName;
   }
 
@@ -41,7 +45,11 @@ class Logger {
     return finalMessageParts.join(" ");
   }
 
-  #log(level: string, message: string, options?: { requestId?: string }) {
+  #isValidLevel = (value: string): value is LevelName => {
+    return value in LEVEL_NAMES;
+  };
+
+  #log(level: LevelName, message: string, options?: { requestId?: string }) {
     if (!this.#shouldLog(level)) return;
     const formattedMessage = this.#format(level, message, options);
 
@@ -60,7 +68,7 @@ class Logger {
     }
   }
 
-  #shouldLog(level: keyof typeof LEVELS) {
+  #shouldLog(level: LevelName) {
     return LEVELS[this.#currentLevel] >= LEVELS[level];
   }
 
