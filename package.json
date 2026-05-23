@@ -4,7 +4,7 @@
   "description": "Repository for Evercode Learning Course",
   "license": "ISC",
   "author": "Sasha Pervykh",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
