@@ -1,4 +1,6 @@
-const { appName, loggerLevel } = require("../../config/config");
+import { config } from "../../config/config.js";
+
+const { appName, loggerLevel } = config;
 
 const LEVELS = {
   ERROR: 0,
@@ -17,7 +19,7 @@ const LEVEL_NAMES = {
 };
 
 class Logger {
-  #currentLevel;
+  #currentLevel: keyof typeof LEVELS;
   #loggerName;
 
   constructor(level = loggerLevel, loggerName = appName) {
@@ -25,7 +27,7 @@ class Logger {
     this.#loggerName = loggerName;
   }
 
-  #format(level, message, options = {}) {
+  #format(level: string, message: string, options?: { requestId?: string }) {
     const time = `${new Date().toISOString()}:`;
     const finalMessageParts = [
       time,
@@ -33,13 +35,13 @@ class Logger {
       `[${level}]`,
       `${message}`,
     ];
-    if (options.requestId) {
+    if (options?.requestId) {
       finalMessageParts.push(`| requestId=${options.requestId}`);
     }
     return finalMessageParts.join(" ");
   }
 
-  #log(level, message, options) {
+  #log(level: string, message: string, options?: { requestId?: string }) {
     if (!this.#shouldLog(level)) return;
     const formattedMessage = this.#format(level, message, options);
 
@@ -58,23 +60,23 @@ class Logger {
     }
   }
 
-  #shouldLog(level) {
+  #shouldLog(level: keyof typeof LEVELS) {
     return LEVELS[this.#currentLevel] >= LEVELS[level];
   }
 
-  error(message, options) {
+  error(message: string, options?: { requestId?: string }) {
     this.#log(LEVEL_NAMES.ERROR, message, options);
   }
-  warn(message, options) {
+  warn(message: string, options?: { requestId?: string }) {
     this.#log(LEVEL_NAMES.WARN, message, options);
   }
-  info(message, options) {
+  info(message: string, options?: { requestId?: string }) {
     this.#log(LEVEL_NAMES.INFO, message, options);
   }
-  debug(message, options) {
+  debug(message: string, options?: { requestId?: string }) {
     this.#log(LEVEL_NAMES.DEBUG, message, options);
   }
-  trace(message, options) {
+  trace(message: string, options?: { requestId?: string }) {
     this.#log(LEVEL_NAMES.TRACE, message, options);
   }
 }
