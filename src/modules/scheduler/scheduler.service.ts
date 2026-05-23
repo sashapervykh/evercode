@@ -1,6 +1,6 @@
-import { AppError } from "../utils/errors/AppError.js";
-import { ValidationError } from "../utils/errors/ValidationError.js";
-import { logger } from "../utils/logger/logger.js";
+import { AppError } from "../../utils/errors/AppError.js";
+import { ValidationError } from "../../utils/errors/ValidationError.js";
+import { logger } from "../../utils/logger/logger.js";
 
 export function scheduleTask(name: string, interval: number, task: () => void) {
   if (!name || typeof name !== "string") {
