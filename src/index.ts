@@ -1,5 +1,5 @@
 import express from "express";
-import { startScheduler } from "./controllers/scheduler.controller.js";
+import { startScheduler } from "./modules/scheduler/scheduler.controller.js";
 
 const app = express();
 

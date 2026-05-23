@@ -1,5 +1,5 @@
-import { logger } from "../utils/logger/logger.js";
-import { scheduleTask } from "../services/scheduler.service.js";
+import { logger } from "../../utils/logger/logger.js";
+import { scheduleTask } from "./scheduler.service.js";
 
 export function startScheduler() {
   logger.info("Scheduler started");
